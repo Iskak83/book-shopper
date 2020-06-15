@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {auth} from '../store'
 
 /**
- * COMPONENT test
+ * COMPONENT test test
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
