@@ -2,11 +2,12 @@ const User = require('./user')
 const Book = require('./book')
 const Author = require('./author')
 const Cart = require('./cart')
+
 Author.hasMany(Book)
 Book.belongsTo(Author)
 
-Cart.hasMany(User, {through: 'orderHistory'})
-User.hasMany(Cart, {through: 'orderHistory'})
+Cart.belongsToMany(User, {through: 'orderHistory'})
+User.belongsToMany(Cart, {through: 'orderHistory'})
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
