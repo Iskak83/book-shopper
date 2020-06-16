@@ -9,10 +9,15 @@ const Author = db.define('author', {
       notEmpty: true
     }
   },
+
   image: {
     type: Sequelize.STRING,
     defaultValueL:
       'https://www.allthetests.com/quiz22/picture/pic_1171831236_1.png'
+  },
+
+  bio: {
+    type: Sequelize.TEXT
   }
 })
 
