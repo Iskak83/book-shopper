@@ -2,6 +2,7 @@ const User = require('./user')
 const Book = require('./book')
 const Author = require('./author')
 const Cart = require('./cart')
+
 Author.hasMany(Book)
 Book.belongsTo(Author)
 
