@@ -4,6 +4,7 @@ import history from '../history'
 // ACTION TYPES
 const GET_All_BOOKS = 'GET_All_BOOKS'
 
+// ACTION CREATOR
 const getAllBooks = allBooks => ({
   type: GET_All_BOOKS,
   allBooks
