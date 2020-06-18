@@ -6,4 +6,4 @@ UnderStory Books is an e-commerce site dedicated to selling the best in gluten-f
 
 ## OAuth
 
-* To use OAuth with Google, visit the [login page](https://understory-books.herokuapp.com/login) and click the "Login with Google" option. *
+To use OAuth with Google, visit the [login page](https://understory-books.herokuapp.com/login) and click the "Login with Google" option.
