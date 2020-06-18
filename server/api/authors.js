@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Author = require('../db/models/author')
 const Book = require('../db/models/book')
+
 router.get('/', async (req, res, next) => {
   try {
     const authors = await Author.findAll()

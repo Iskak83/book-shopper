@@ -5,6 +5,9 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import AllBooks from './components/AllBooks'
+import SingleBook from './components/SingleBook'
+import AllAuthors from './components/AllAuthors'
+import SingleAuthor from './components/SingleAuthor'
 
 /**
  * COMPONENT
@@ -18,20 +21,27 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <AllBooks />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+      <div>
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          {/* <AllBooks /> */}
+          {/* <Route exact path="/" component={AllBooks} /> */}
+          <Route exact path="/books" component={AllBooks} />
+          <Route exact path="/books/:id" component={SingleBook} />
+          <Route exact path="/" component={AllAuthors} />
+          <Route exact path="/authors/:id" component={SingleAuthor} />
+          {isLoggedIn && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              <Route path="/home" component={UserHome} />
+            </Switch>
+          )}
+          {/* Displays our Login component as a fallback */}
+          <Route component={Login} />
+        </Switch>
+      </div>
     )
   }
 }
