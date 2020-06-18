@@ -1,7 +1,6 @@
 const {green, red} = require('chalk')
 const db = require('../server/db')
-const {Book, User, Cart, Author} = require('../server/db/models')
-
+const {Book, User, Order, Author, BookOrder} = require('../server/db/models')
 let seededBooks = [
   {
     name: 'Moby Dick; or, The Whale',
@@ -16,7 +15,7 @@ let seededBooks = [
       'Whaling',
       'Ship captains'
     ],
-    price: 10.99,
+    price: 1099,
     quantity: 1
   },
   {
@@ -26,7 +25,7 @@ let seededBooks = [
     image:
       'https://upload.wikimedia.org/wikipedia/commons/a/af/Tolstoy_-_War_and_Peace_-_first_edition%2C_1869.jpg',
     tags: ['Fiction', 'Historical fiction', 'Romance', 'Russia'],
-    price: 7.99,
+    price: 799,
     quantity: 1
   },
   {
@@ -42,7 +41,7 @@ let seededBooks = [
       'Napoleonic Wars',
       'Russia'
     ],
-    price: 9.99,
+    price: 999,
     quantity: 1
   },
   {
@@ -58,7 +57,7 @@ let seededBooks = [
       'Knights and knighthood',
       'Spain'
     ],
-    price: 5.99,
+    price: 599,
     quantity: 1
   },
   {
@@ -68,7 +67,7 @@ let seededBooks = [
     image:
       'https://upload.wikimedia.org/wikipedia/commons/3/35/Frankenstein_1818_edition_title_page.jpg',
     tags: ['Fiction', 'Gothic fiction', 'Romance', 'Monsters', 'England'],
-    price: 11.99,
+    price: 1199,
     quantity: 1
   }
 ]
@@ -123,6 +122,10 @@ const seed = async () => {
     const book3 = await Book.create(seededBooks[2])
     const book4 = await Book.create(seededBooks[3])
     const book5 = await Book.create(seededBooks[4])
+    const order = await Order.create({})
+    order.addBook(book1, {through: {savedPrice: book1.price}})
+    order.addBook(book2)
+    await order.save()
 
     const user1 = await User.create(seededUsers[0])
   } catch (err) {

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getAllBooksThunk} from '../store/books'
+import {Link} from 'react-router-dom'
 
 class AllBooks extends React.Component {
   constructor() {
@@ -26,10 +27,12 @@ class AllBooks extends React.Component {
                 <img src={book.image} />
               </div>
               <div className="book-container-right">
-                <p>{book.name}</p>
+                <Link to={`/books/${book.id}`}>
+                  <p>{book.name}</p>
+                </Link>
                 <p>{book.authorName}</p>
-                <p>Price: ${book.price}</p>
-                <button>Add to Cart</button>
+                <p>Price: ${book.price / 100}</p>
+                <button type="button">Add to Cart</button>
               </div>
             </div>
           ))
