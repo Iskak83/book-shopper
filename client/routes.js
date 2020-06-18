@@ -6,6 +6,8 @@ import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import AllBooks from './components/AllBooks'
 import SingleBook from './components/SingleBook'
+import AllAuthors from './components/AllAuthors'
+import SingleAuthor from './components/SingleAuthor'
 
 /**
  * COMPONENT
@@ -25,8 +27,11 @@ class Routes extends Component {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           {/* <AllBooks /> */}
-          <Route exact path="/" component={AllBooks} />
+          {/* <Route exact path="/" component={AllBooks} /> */}
+          <Route exact path="/books" component={AllBooks} />
           <Route exact path="/books/:id" component={SingleBook} />
+          <Route exact path="/" component={AllAuthors} />
+          <Route exact path="/authors/:id" component={SingleAuthor} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
