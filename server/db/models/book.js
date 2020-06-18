@@ -1,10 +1,9 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const Author = require('./author')
 
 const Book = db.define('book', {
   name: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -15,26 +14,18 @@ const Book = db.define('book', {
     type: Sequelize.TEXT
   },
 
-  authorName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-
   image: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue:
       'https://images-na.ssl-images-amazon.com/images/I/61CxJAPauWL._AC_SL1010_.jpg'
   },
 
-  tags: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  tag: {
+    type: Sequelize.TEXT
   },
 
   price: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -42,19 +33,9 @@ const Book = db.define('book', {
   },
 
   quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 1
+    type: Sequelize.TEXT,
+    defaultValue: 100
   }
-})
-
-Book.afterCreate(async (bookInstance, optionsObject) => {
-  bookInstance.setAuthor(
-    await Author.findOne({
-      where: {name: bookInstance.authorName}
-    })
-  )
-  // console.log('booInstance.__proto__:', bookInstance.__proto__)
-  await bookInstance.save()
 })
 
 module.exports = Book
