@@ -7,7 +7,8 @@ const Order = db.define('order', {
     defaultValue: 0
   },
   totalPrice: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
   isCart: {
     type: Sequelize.BOOLEAN,

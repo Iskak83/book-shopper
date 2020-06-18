@@ -122,10 +122,10 @@ const seed = async () => {
     const book3 = await Book.create(seededBooks[2])
     const book4 = await Book.create(seededBooks[3])
     const book5 = await Book.create(seededBooks[4])
-    const order = await Order.create({})
-    order.addBook(book1, {through: {savedPrice: book1.price}})
-    order.addBook(book2)
-    await order.save()
+    // const order = await Order.create({})
+    // order.addBook(book1, {through: {savedPrice: book1.price}})
+    // order.addBook(book2)
+    // await order.save()
 
     const user1 = await User.create(seededUsers[0])
   } catch (err) {

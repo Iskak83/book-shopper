@@ -14,13 +14,18 @@ Order.belongsTo(User)
 const BookOrder = db.define('BookOrder', {
   savedPrice: {
     type: Sequelize.INTEGER
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 
-BookOrder.afterCreate(async bookOrder => {
-  console.log(bookOrder)
-  bookOrder.savedPrice = 1039459
-})
+// Order.hasMany(BookOrder)
+// BookOrder.belongsTo(Order)
+
+// Book.hasMany(BookOrder)
+// BookOrder.belongsTo(Book)
 
 Order.belongsToMany(Book, {through: 'BookOrder'})
 Book.belongsToMany(Order, {through: 'BookOrder'})
