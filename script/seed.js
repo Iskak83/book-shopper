@@ -6,8 +6,10 @@ const data = require('./data.json')
 const seed = async () => {
   try {
     await db.sync({force: true})
+
     const books = data.allBooks
     const seedAuthors = {}
+
     for (let i = 0; i < books.length; i++) {
       const price = parseInt(books[i].price) * 100
       const book = await Book.create({

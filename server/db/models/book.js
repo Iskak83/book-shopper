@@ -34,6 +34,11 @@ const Book = db.define('book', {
 
   quantity: {
     type: Sequelize.INTEGER,
+    defaultValue: 1
+  },
+
+  inStock: {
+    type: Sequelize.INTEGER,
     defaultValue: 100
   }
 })

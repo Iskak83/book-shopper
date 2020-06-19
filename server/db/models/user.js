@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
-
+const Order = require('./order')
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
@@ -67,4 +67,8 @@ User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)
+})
+User.afterCreate(async user => {
+  const order = await Order.create({})
+  await user.addOrder(order)
 })

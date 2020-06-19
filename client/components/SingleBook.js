@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleBookThunk} from '../store/book'
+import Axios from 'axios'
 
 class SingleBook extends React.Component {
   constructor() {
@@ -11,7 +12,9 @@ class SingleBook extends React.Component {
   componentDidMount() {
     this.props.getSingleBook(this.props.match.params.id)
   }
-
+  handleClick(id) {
+    Axios.put('../api/orders', {bookId: id})
+  }
   render() {
     const singleBook = this.props.singleBook
 
@@ -33,7 +36,14 @@ class SingleBook extends React.Component {
             <p>
               <b>Current Quantity:</b> {singleBook.quantity}
             </p>
-            <button>Add to Cart</button>
+            <button
+              type="button"
+              onClick={() => {
+                this.handleClick(singleBook.id)
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>
