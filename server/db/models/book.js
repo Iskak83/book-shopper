@@ -25,7 +25,7 @@ const Book = db.define('book', {
   },
 
   price: {
-    type: Sequelize.TEXT,
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -33,7 +33,7 @@ const Book = db.define('book', {
   },
 
   quantity: {
-    type: Sequelize.TEXT,
+    type: Sequelize.INTEGER,
     defaultValue: 100
   }
 })

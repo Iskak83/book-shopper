@@ -9,11 +9,12 @@ const seed = async () => {
     const books = data.allBooks
     const seedAuthors = {}
     for (let i = 0; i < books.length; i++) {
+      const price = parseInt(books[i].price) * 100
       const book = await Book.create({
         name: books[i].name,
         image: books[i].image,
         tag: books[i].tags,
-        price: books[i].price
+        price: price
       })
       if (books[i].authorName) {
         let author
