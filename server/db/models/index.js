@@ -1,13 +1,35 @@
 const User = require('./user')
 const Book = require('./book')
 const Author = require('./author')
-const Cart = require('./cart')
+const Order = require('./order')
+const Sequelize = require('sequelize')
+const db = require('../db')
 
 Author.hasMany(Book)
 Book.belongsTo(Author)
 
-Cart.belongsToMany(User, {through: 'orderHistory'})
-User.belongsToMany(Cart, {through: 'orderHistory'})
+User.hasMany(Order)
+Order.belongsTo(User)
+
+const BookOrder = db.define('BookOrder', {
+  savedPrice: {
+    type: Sequelize.INTEGER
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  }
+})
+
+// Order.hasMany(BookOrder)
+// BookOrder.belongsTo(Order)
+
+// Book.hasMany(BookOrder)
+// BookOrder.belongsTo(Book)
+
+Order.belongsToMany(Book, {through: 'BookOrder'})
+Book.belongsToMany(Order, {through: 'BookOrder'})
+
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -25,5 +47,6 @@ module.exports = {
   User,
   Book,
   Author,
-  Cart
+  Order,
+  BookOrder
 }

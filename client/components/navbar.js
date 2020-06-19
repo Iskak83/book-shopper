@@ -30,6 +30,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 
       <div className="nav-bottom">
         <div className="nav-bottom-left">
+          <Link to="/books">Books</Link>
           <Link to="/authors">Authors</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
