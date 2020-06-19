@@ -25,4 +25,14 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    req.body.price = req.body.price * 100
+    const newBook = await Book.create(req.body)
+    res.jason(newBook)
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router
