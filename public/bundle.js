@@ -287,7 +287,7 @@ function (_React$Component) {
           className: "book-container-right"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
           to: "/books/".concat(book.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.authorName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", book.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.author.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", book.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button"
         }, "Add to Cart")));
       }));
@@ -387,7 +387,7 @@ function (_React$Component) {
         src: singleAuthor.image
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "book-container-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, singleAuthor.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleAuthor.bio))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Author's Books"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, singleAuthor.books && singleAuthor.books.length ? singleAuthor.books.map(function (book) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, singleAuthor.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleAuthor.bio))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Author's Books"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, singleAuthor.books && singleAuthor.books.length ? singleAuthor.books.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           key: book.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -502,25 +502,30 @@ function (_React$Component) {
 
       var singleBook = this.props.singleBook;
       console.log(singleBook);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "books-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "book-container",
-        key: singleBook.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "book-container-left"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: singleBook.image
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "book-container-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, singleBook.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-        to: "/authors/".concat(singleBook.authorId)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleBook.authorName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Description:"), " ", singleBook.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", singleBook.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Quantity:"), " ", singleBook.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          return _this2.handleClick(singleBook.id);
-        },
-        type: "button"
-      }, "Add to Cart"))));
+
+      if (singleBook.id) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "books-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-container",
+          key: singleBook.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-container-left"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: singleBook.image
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-container-right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, singleBook.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/authors/".concat(singleBook.authorId)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleBook.author.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Description:"), " ", singleBook.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", singleBook.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Quantity:"), " ", singleBook.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this2.handleClick(singleBook.id);
+          },
+          type: "button"
+        }, "Add to Cart"))));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading");
+      }
     }
   }]);
 
@@ -45154,7 +45159,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

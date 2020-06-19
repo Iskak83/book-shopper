@@ -30,7 +30,7 @@ class AllBooks extends React.Component {
                 <Link to={`/books/${book.id}`}>
                   <p>{book.name}</p>
                 </Link>
-                <p>{book.authorName}</p>
+                <p>{book.author.name}</p>
                 <p>Price: ${book.price / 100}</p>
                 <button type="button">Add to Cart</button>
               </div>

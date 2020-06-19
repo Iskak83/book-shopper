@@ -28,7 +28,7 @@ class SingleAuthor extends React.Component {
           </div>
         </div>
         <h4>Author's Books</h4>
-        <p>
+        <div>
           {singleAuthor.books && singleAuthor.books.length ? (
             singleAuthor.books.map(book => (
               <ul key={book.id}>
@@ -54,7 +54,7 @@ class SingleAuthor extends React.Component {
           ) : (
             <h5>This author doesn't have any books listed yet</h5>
           )}
-        </p>
+        </div>
       </div>
     )
   }
