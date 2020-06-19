@@ -19,7 +19,7 @@ class AllBooks extends React.Component {
     return (
       <div className="books-container">
         {books === undefined || !books.length ? (
-          <h3>There are no books</h3>
+          <h3>Loading...</h3>
         ) : (
           books.map(book => (
             <div className="book-container" key={book.id}>
@@ -30,7 +30,14 @@ class AllBooks extends React.Component {
                 <Link to={`/books/${book.id}`}>
                   <p>{book.name}</p>
                 </Link>
-                <p>{book.author.name}</p>
+
+                {book.author ? (
+                  <Link to={`/authors/${book.author.id}`}>
+                    <p>Author: {book.author.name}</p>{' '}
+                  </Link>
+                ) : (
+                  <p>Unknown author</p>
+                )}
                 <p>Price: ${book.price / 100}</p>
                 <button type="button">Add to Cart</button>
               </div>

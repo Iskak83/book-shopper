@@ -29,7 +29,7 @@ class SingleBook extends React.Component {
             <div className="book-container-right">
               <h3>{singleBook.name}</h3>
               <Link to={`/authors/${singleBook.authorId}`}>
-                <h4>{singleBook.author.name}</h4>
+                <h4>Author: {singleBook.author.name}</h4>
               </Link>
               <p>
                 <b>Description:</b> {singleBook.description}

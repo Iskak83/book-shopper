@@ -275,7 +275,7 @@ function (_React$Component) {
       var books = this.props.books;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "books-container"
-      }, books === undefined || !books.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "There are no books") : books.map(function (book) {
+      }, books === undefined || !books.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Loading...") : books.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-container",
           key: book.id
@@ -287,7 +287,9 @@ function (_React$Component) {
           className: "book-container-right"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
           to: "/books/".concat(book.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.author.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", book.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.name)), book.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/authors/".concat(book.author.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author: ", book.author.name), ' ') : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unknown author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", book.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button"
         }, "Add to Cart")));
       }));
@@ -517,7 +519,7 @@ function (_React$Component) {
           className: "book-container-right"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, singleBook.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
           to: "/authors/".concat(singleBook.authorId)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleBook.author.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Description:"), " ", singleBook.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", singleBook.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Quantity:"), " ", singleBook.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Author: ", singleBook.author.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Description:"), " ", singleBook.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", singleBook.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Quantity:"), " ", singleBook.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             return _this2.handleClick(singleBook.id);
           },
@@ -1264,15 +1266,16 @@ var getAllBooksThunk = function getAllBooksThunk() {
                 _ref2 = _context.sent;
                 data = _ref2.data;
                 dispatch(getAllBooks(data));
-                _context.next = 11;
+                _context.next = 12;
                 break;
 
               case 8:
                 _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log('Error in my getAllBooksThunk!');
+                console.log(_context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
