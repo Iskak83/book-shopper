@@ -10,7 +10,13 @@ const seed = async () => {
 
     const user = await User.create({
       email: 'cody@email.com',
-      password: '12345'
+      password: '12345',
+      isAdmin: true
+    })
+    const user1 = await User.create({
+      email: 'rob@email.com',
+      password: '12345',
+      isAdmin: false
     })
 
     for (let i = 0; i <= 30; ++i) {

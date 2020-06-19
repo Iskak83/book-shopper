@@ -796,8 +796,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 var UserHome = function UserHome(props) {
-  var email = props.email;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Welcome, ", email));
+  var email = props.email,
+      isAdmin = props.isAdmin;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Welcome, ", email), isAdmin ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Admin status: Admin") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Admin status: User"));
 };
 /**
  * CONTAINER
@@ -805,7 +806,8 @@ var UserHome = function UserHome(props) {
 
 var mapState = function mapState(state) {
   return {
-    email: state.user.email
+    email: state.user.email,
+    isAdmin: state.user.isAdmin
   };
 };
 
