@@ -1,11 +1,25 @@
 const {green, red} = require('chalk')
 const db = require('../server/db')
-const {Book, Author} = require('../server/db/models')
+const {Book, Author, User} = require('../server/db/models')
 const data = require('./data.json')
+const faker = require('faker')
 
 const seed = async () => {
   try {
     await db.sync({force: true})
+
+    const user = await User.create({
+      email: 'cody@email.com',
+      password: '12345'
+    })
+
+    for (let i = 0; i <= 30; ++i) {
+      await User.create({
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      })
+    }
+
     const books = data.allBooks
     const seedAuthors = {}
     for (let i = 0; i < books.length; i++) {
