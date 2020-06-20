@@ -11,15 +11,20 @@ describe('Author model', () => {
 
   describe('attributes', () => {
     it('returns object', async () => {
-      let author = await Author.create({
+      let author = await Author.build({
         name: 'Poter'
       })
       expect(author.name).to.be.equal('Poter')
     })
+  })
 
-    // it('returns false if the password is incorrect', () => {
-    //   expect(cody.correctPassword('bonez')).to.be.equal(false)
-    // })
-    // end describe('correctPassword')
-  }) // end describe('instanceMethods')
-}) // end describe('User model')
+  it('name cannot be empty', async () => {
+    const author = Author.build({name: ''})
+    try {
+      await author.validate()
+      throw Error('validation should have failed with empty name')
+    } catch (err) {
+      expect(err.message).to.contain('Validation notEmpty on name')
+    }
+  })
+})

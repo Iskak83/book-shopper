@@ -1,37 +1,44 @@
 /* global describe beforeEach it */
 
-const {expect} = require('chai')
-const db = require('../index')
-const Book = db.model('book')
+// const {expect} = require('chai')
+import {expect} from 'chai'
+import {mount} from 'enzyme'
+import sinon from 'sinon'
+const db = require('../db')
+const Book = require('./book')
 
-describe('Book model', () => {
-  beforeEach(() => {
-    return db.sync({force: true})
+describe('Book Model', () => {
+  before(() => db.sync({force: true}))
+  afterEach(() => db.sync({force: true}))
+
+  it('has fields name, description, image, tag, price, inStock', async () => {
+    const book = await Book.create({
+      name: 'Jupiter Jumpstart',
+      description:
+        'The best JavaScript Academy for toddlers in the solar system!',
+      image: '/images/jupiter.png',
+      tag: 'HHHH',
+      price: 400,
+      inStock: 100
+    })
+    expect(book.name).to.equal('Jupiter Jumpstart')
+    expect(book.price).to.equal(400)
+    expect(book.image).to.equal('/images/jupiter.png')
+    expect(book.description).to.equal(
+      'The best JavaScript Academy for toddlers in the solar system!'
+    )
+    expect(book.tag).to.equal('HHHH')
+    expect(book.inStock).to.equal(100)
   })
 
-  describe('attributes', () => {
-    it('returns object', async () => {
-      let book = await Book.create({
-        name: 'Garry',
-        price: 3.99,
-        authorName: 'Poter'
-      })
-      expect(book.name).to.be.equal('Garry')
-      expect(book.price).to.be.equal(3.99)
-      expect(book.authorName).to.be.equal('Poter')
-    })
-    it('returns undefined', async () => {
-      expect(
-        await Book.create({
-          name: 'Garry',
-          authorName: 'Poter'
-        })
-      ).to.throw('notNull Violation: book.price cannot be null')
-    })
-
-    // it('returns false if the password is incorrect', () => {
-    //   expect(cody.correctPassword('bonez')).to.be.equal(false)
-    // })
-    // end describe('correctPassword')
-  }) // end describe('instanceMethods')
-}) // end describe('User model')
+  it('name and price cannot be empty', async () => {
+    const book = Book.build({name: '', price: ''})
+    try {
+      await book.validate()
+      throw Error('validation should have failed with empty name and price')
+    } catch (err) {
+      expect(err.message).to.contain('Validation notEmpty on name')
+      expect(err.message).to.contain('Validation notEmpty on price')
+    }
+  })
+})
