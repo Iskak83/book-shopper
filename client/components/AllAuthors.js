@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getAllAuthorsThunk} from '../store/authors'
+import {Link} from 'react-router-dom'
 
 class AllAuthors extends React.Component {
   // constructor() {
@@ -25,7 +26,9 @@ class AllAuthors extends React.Component {
                 <img src={author.image} />
               </div>
               <div className="book-container-right">
-                <p>{author.name}</p>
+                <Link to={`/authors/${author.id}`}>
+                  <p>{author.name}</p>
+                </Link>
                 <p>{author.bio}</p>
               </div>
             </div>

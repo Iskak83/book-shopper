@@ -124,6 +124,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_authors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/authors */ "./client/store/authors.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -141,6 +142,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -182,7 +184,9 @@ function (_React$Component) {
           src: author.image
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-container-right"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, author.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, author.bio)));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/authors/".concat(author.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, author.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, author.bio)));
       }));
     }
   }]);
@@ -221,6 +225,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_books__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/books */ "./client/store/books.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -238,6 +243,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -269,7 +275,7 @@ function (_React$Component) {
       var books = this.props.books;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "books-container"
-      }, books === undefined || !books.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "There are no books") : books.map(function (book) {
+      }, books === undefined || !books.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Loading...") : books.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-container",
           key: book.id
@@ -279,7 +285,13 @@ function (_React$Component) {
           src: book.image
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-container-right"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.authorName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", book.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add to Cart")));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/books/".concat(book.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.name)), book.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/authors/".concat(book.author.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author: ", book.author.name), ' ') : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unknown author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", book.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button"
+        }, "Add to Cart")));
       }));
     }
   }]);
@@ -318,6 +330,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleAuthor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleAuthor */ "./client/store/singleAuthor.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -335,6 +348,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -375,10 +389,10 @@ function (_React$Component) {
         src: singleAuthor.image
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "book-container-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, singleAuthor.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleAuthor.bio)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Author's Books"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, singleAuthor.books && singleAuthor.books.length ? singleAuthor.books.map(function (book) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, singleAuthor.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleAuthor.bio))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Author's Books"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, singleAuthor.books && singleAuthor.books.length ? singleAuthor.books.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           key: book.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-container-left"
@@ -386,10 +400,12 @@ function (_React$Component) {
           src: book.image
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-container-right"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, book.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, book.authorName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Price: $", book.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/books/".concat(book.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, book.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, book.authorName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Price: $", book.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "submit"
         }, "Add to Cart")))));
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "This author doesn't have any books listed yet"))));
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "This author doesn't have any books listed yet")));
     }
   }]);
 
@@ -427,8 +443,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_book__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/book */ "./client/store/book.js");
+<<<<<<< HEAD
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+=======
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+>>>>>>> eab38711227d69fec30def63be4e37905785ee5d
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -452,6 +474,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> eab38711227d69fec30def63be4e37905785ee5d
 var SingleBook =
 /*#__PURE__*/
 function (_React$Component) {
@@ -475,7 +501,11 @@ function (_React$Component) {
   }, {
     key: "handleClick",
     value: function handleClick(id) {
+<<<<<<< HEAD
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.put('../api/orders', {
+=======
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.put('../api/orders', {
+>>>>>>> eab38711227d69fec30def63be4e37905785ee5d
         bookId: id
       });
     }
@@ -485,6 +515,7 @@ function (_React$Component) {
       var _this2 = this;
 
       var singleBook = this.props.singleBook;
+<<<<<<< HEAD
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "books-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -502,6 +533,33 @@ function (_React$Component) {
           _this2.handleClick(singleBook.id);
         }
       }, "Add to Cart"))));
+=======
+      console.log(singleBook);
+
+      if (singleBook.id) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "books-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-container",
+          key: singleBook.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-container-left"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: singleBook.image
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-container-right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, singleBook.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/authors/".concat(singleBook.authorId)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Author: ", singleBook.author.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Description:"), " ", singleBook.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", singleBook.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Quantity:"), " ", singleBook.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this2.handleClick(singleBook.id);
+          },
+          type: "button"
+        }, "Add to Cart"))));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading");
+      }
+>>>>>>> eab38711227d69fec30def63be4e37905785ee5d
     }
   }]);
 
@@ -703,6 +761,8 @@ var Navbar = function Navbar(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "nav-bottom-left"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/books"
+  }, "Books"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/authors"
   }, "Authors"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/about"
@@ -933,7 +993,7 @@ function (_Component) {
         component: _components_SingleBook__WEBPACK_IMPORTED_MODULE_7__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
-        path: "/",
+        path: "/authors",
         component: _components_AllAuthors__WEBPACK_IMPORTED_MODULE_8__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
@@ -1238,15 +1298,16 @@ var getAllBooksThunk = function getAllBooksThunk() {
                 _ref2 = _context.sent;
                 data = _ref2.data;
                 dispatch(getAllBooks(data));
-                _context.next = 11;
+                _context.next = 12;
                 break;
 
               case 8:
                 _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log('Error in my getAllBooksThunk!');
+                console.log(_context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -45133,7 +45194,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

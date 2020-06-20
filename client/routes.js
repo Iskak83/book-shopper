@@ -30,7 +30,7 @@ class Routes extends Component {
           {/* <Route exact path="/" component={AllBooks} /> */}
           <Route exact path="/books" component={AllBooks} />
           <Route exact path="/books/:id" component={SingleBook} />
-          <Route exact path="/" component={AllAuthors} />
+          <Route exact path="/authors" component={AllAuthors} />
           <Route exact path="/authors/:id" component={SingleAuthor} />
           {isLoggedIn && (
             <Switch>

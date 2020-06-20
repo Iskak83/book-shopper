@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleAuthorThunk} from '../store/singleAuthor'
+import {Link} from 'react-router-dom'
 
 class SingleAuthor extends React.Component {
   constructor() {
@@ -25,32 +26,34 @@ class SingleAuthor extends React.Component {
             <h3>{singleAuthor.name}</h3>
             <h4>{singleAuthor.bio}</h4>
           </div>
-          <h4>Author's Books</h4>
-          <p>
-            {singleAuthor.books && singleAuthor.books.length ? (
-              singleAuthor.books.map(book => (
-                <ul key={book.id}>
-                  <li>
-                    {
-                      <div className="book-container">
-                        <div className="book-container-left">
-                          <img src={book.image} />
-                        </div>
-                        <div className="book-container-right">
-                          <h3>{book.name}</h3>
-                          <h3>{book.authorName}</h3>
-                          <h3>Price: ${book.price / 100}</h3>
-                          <button type="submit">Add to Cart</button>
-                        </div>
+        </div>
+        <h4>Author's Books</h4>
+        <div>
+          {singleAuthor.books && singleAuthor.books.length ? (
+            singleAuthor.books.map(book => (
+              <ul key={book.id}>
+                <div>
+                  {
+                    <div className="book-container">
+                      <div className="book-container-left">
+                        <img src={book.image} />
                       </div>
-                    }
-                  </li>
-                </ul>
-              ))
-            ) : (
-              <h5>This author doesn't have any books listed yet</h5>
-            )}
-          </p>
+                      <div className="book-container-right">
+                        <Link to={`/books/${book.id}`}>
+                          <h3>{book.name}</h3>
+                        </Link>
+                        <h3>{book.authorName}</h3>
+                        <h3>Price: ${book.price / 100}</h3>
+                        <button type="submit">Add to Cart</button>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </ul>
+            ))
+          ) : (
+            <h5>This author doesn't have any books listed yet</h5>
+          )}
         </div>
       </div>
     )

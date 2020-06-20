@@ -17,6 +17,7 @@ export const getAllBooksThunk = () => async dispatch => {
     dispatch(getAllBooks(data))
   } catch (err) {
     console.log('Error in my getAllBooksThunk!')
+    console.log(err)
   }
 }
 
