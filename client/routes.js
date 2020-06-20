@@ -8,6 +8,7 @@ import AllBooks from './components/AllBooks'
 import SingleBook from './components/SingleBook'
 import AllAuthors from './components/AllAuthors'
 import SingleAuthor from './components/SingleAuthor'
+import AddBookForm from './components/AddBookForm'
 
 /**
  * COMPONENT
@@ -29,6 +30,7 @@ class Routes extends Component {
           {/* <AllBooks /> */}
           {/* <Route exact path="/" component={AllBooks} /> */}
           <Route exact path="/books" component={AllBooks} />
+          <Route exact path="/add-book" component={AddBookForm} />
           <Route exact path="/books/:id" component={SingleBook} />
           <Route exact path="/authors" component={AllAuthors} />
           <Route exact path="/authors/:id" component={SingleAuthor} />

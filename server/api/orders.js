@@ -1,14 +1,14 @@
 const router = require('express').Router()
 const Order = require('../db/models/order')
 const Book = require('../db/models/book')
-const {BookOrder} = require('../db/models/index')
+// const {BookOrder} = require('../db/models/index')
 
 router.put('/', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
-        isCart: true
+        isCheckedout: false
       }
     })
     const book = await Book.findOne({

@@ -1,18 +1,17 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-// const User = require('./user')
 const Order = db.define('order', {
-  quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
-  },
   totalPrice: {
     type: Sequelize.INTEGER,
     defaultValue: 0
   },
-  isCart: {
+  isCheckedout: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: false
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 

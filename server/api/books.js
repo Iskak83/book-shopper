@@ -25,4 +25,19 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    req.body.price = req.body.price * 100
+    const bookTemplate = req.body
+    for (let key in bookTemplate) {
+      if (bookTemplate[key] === 0 || bookTemplate[key] === '')
+        delete bookTemplate[key]
+    }
+    const newBook = await Book.create(bookTemplate)
+    res.json(newBook)
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router
