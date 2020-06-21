@@ -18,7 +18,7 @@ class AllAuthors extends React.Component {
     return (
       <div className="books-container">
         {allAuthors === undefined || !allAuthors.length ? (
-          <h3>There are no authors</h3>
+          <h3>Loading...</h3>
         ) : (
           allAuthors.map(author => (
             <div className="book-container" key={author.id}>
