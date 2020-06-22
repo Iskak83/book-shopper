@@ -43,13 +43,17 @@ class AllBooks extends React.Component {
                   <p>Unknown author</p>
                 )}
                 <p>Price: ${book.price / 100}</p>
-                <button
-                  onClick={() => this.handleDelete(book.id)}
-                  type="button"
-                  className="remove_button"
-                >
-                  Remove Book
-                </button>
+                {this.props.user && this.props.user.isAdmin === true ? (
+                  <button
+                    onClick={() => this.handleDelete(book.id)}
+                    type="button"
+                    className="remove_button"
+                  >
+                    Remove Book
+                  </button>
+                ) : (
+                  ''
+                )}
               </div>
             </div>
           ))
@@ -60,7 +64,8 @@ class AllBooks extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  books: state.books
+  books: state.books,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -318,7 +318,7 @@ function (_React$Component) {
       var allAuthors = this.props.authors;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "books-container"
-      }, allAuthors === undefined || !allAuthors.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "There are no authors") : allAuthors.map(function (author) {
+      }, allAuthors === undefined || !allAuthors.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Loading...") : allAuthors.map(function (author) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-container",
           key: author.id
@@ -443,13 +443,13 @@ function (_React$Component) {
           to: "/books/".concat(book.id)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.name)), book.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
           to: "/authors/".concat(book.author.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author: ", book.author.name), ' ') : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unknown author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", book.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author: ", book.author.name), ' ') : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unknown author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", book.price / 100), _this2.props.user && _this2.props.user.isAdmin === true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             return _this2.handleDelete(book.id);
           },
           type: "button",
           className: "remove_button"
-        }, "Remove Book")));
+        }, "Remove Book") : ''));
       }));
     }
   }]);
@@ -459,7 +459,8 @@ function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    books: state.books
+    books: state.books,
+    user: state.user
   };
 };
 
@@ -1835,11 +1836,13 @@ function singleBookReducer() {
 /*!*******************************!*\
   !*** ./client/store/books.js ***!
   \*******************************/
-/*! exports provided: getAllBooksThunk, addBookThunk, deleteBook, default */
+/*! exports provided: getAllBooks, addBook, getAllBooksThunk, addBookThunk, deleteBook, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllBooks", function() { return getAllBooks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addBook", function() { return addBook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllBooksThunk", function() { return getAllBooksThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addBookThunk", function() { return addBookThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteBook", function() { return deleteBook; });
@@ -1872,7 +1875,6 @@ var getAllBooks = function getAllBooks(allBooks) {
     allBooks: allBooks
   };
 };
-
 var addBook = function addBook(book) {
   return {
     type: ADD_BOOK,
@@ -2048,11 +2050,12 @@ function booksReducer() {
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
   \*******************************/
-/*! exports provided: default, me, auth, logout */
+/*! exports provided: store, default, me, auth, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_1__);
