@@ -15,7 +15,7 @@ const BookOrder = db.define('BookOrder', {
   savedPrice: {
     type: Sequelize.INTEGER
   },
-  quantity: {
+  bookQuantity: {
     type: Sequelize.INTEGER,
     defaultValue: 0
   }
@@ -24,8 +24,8 @@ const BookOrder = db.define('BookOrder', {
 // Order.hasMany(BookOrder)
 // BookOrder.belongsTo(Order)
 
-// Book.hasMany(BookOrder)
-// BookOrder.belongsTo(Book)
+Book.hasMany(BookOrder)
+BookOrder.belongsTo(Book)
 
 Order.belongsToMany(Book, {through: 'BookOrder'})
 Book.belongsToMany(Order, {through: 'BookOrder'})

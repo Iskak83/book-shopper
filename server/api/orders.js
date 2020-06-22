@@ -1,7 +1,25 @@
 const router = require('express').Router()
 const Order = require('../db/models/order')
 const Book = require('../db/models/book')
-// const {BookOrder} = require('../db/models/index')
+const {BookOrder} = require('../db/models/index')
+
+router.get('/', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isCheckedout: false
+      }
+    })
+    const currentOrder = await BookOrder.findAll({
+      where: {orderId: order.id},
+      include: Book
+    })
+    res.json(currentOrder)
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.put('/', async (req, res, next) => {
   try {
@@ -16,20 +34,48 @@ router.put('/', async (req, res, next) => {
         id: req.body.bookId
       }
     })
-
-    if (await order.hasBook(book)) {
-      book.quantity++
+    const orderChange = {
+      savedPrice: book.price,
+      bookQuantity: req.body.quantity
     }
-    order.quantity = book.quantity
-    order.totalPrice += book.price
-    await order.save()
-    await order.addBook(book, {
-      through: {savedPrice: book.price, quantity: book.quantity}
+    if (await order.hasBook(book)) {
+      const bookOrder = await BookOrder.findOne({
+        where: {
+          orderId: order.id,
+          bookId: book.id
+        }
+      })
+      await bookOrder.update(orderChange)
+    } else {
+      await order.addBook(book, {through: orderChange})
+    }
+
+    const currentOrder = await BookOrder.findAll({
+      where: {orderId: order.id},
+      include: Book
     })
-    res.send(order)
+
+    res.json(currentOrder)
   } catch (err) {
     console.log('Error in Orders put')
     next(err)
+  }
+})
+
+router.put('/checkout', async (req, res, next) => {
+  try {
+    const checkoutOrder = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isCheckedout: false
+      }
+    })
+    await checkoutOrder.update(req.body)
+    const newOrder = await Order.create({})
+    await req.user.addOrder(newOrder)
+    res.json(newOrder)
+  } catch (error) {
+    next(error)
   }
 })
 

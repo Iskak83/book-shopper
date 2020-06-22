@@ -7,13 +7,14 @@ import booksReducer from './books'
 import singleBookReducer from './book'
 import authorsReducer from './authors'
 import singleAuthorReducer from './singleAuthor'
-
+import orderReducer from './order'
 const reducer = combineReducers({
   user,
   books: booksReducer,
   authors: authorsReducer,
   singleBook: singleBookReducer,
-  singleAuthor: singleAuthorReducer
+  singleAuthor: singleAuthorReducer,
+  order: orderReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

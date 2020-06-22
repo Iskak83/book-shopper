@@ -9,7 +9,7 @@ const Order = db.define('order', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
-  quantity: {
+  totalQuantity: {
     type: Sequelize.INTEGER,
     defaultValue: 0
   }

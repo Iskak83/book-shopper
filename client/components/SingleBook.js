@@ -2,23 +2,37 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleBookThunk} from '../store/book'
 import {Link} from 'react-router-dom'
-import axios from 'axios'
+import {putBookInCart} from '../store/order'
+import EditBookForm from './EditBookForm'
 
 class SingleBook extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      quantity: 1
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
-
   componentDidMount() {
     this.props.getSingleBook(this.props.match.params.id)
   }
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
   handleClick(id) {
-    axios.put('../api/orders', {bookId: id})
+    const orderReq = this.state
+    orderReq.bookId = id
+    this.props.putBookInCart(orderReq)
   }
   render() {
     const singleBook = this.props.singleBook
     console.log(singleBook)
+    const options = []
+
+    for (let i = 1; i <= 10; i++) {
+      options.push(i)
+    }
     if (singleBook.id) {
       return (
         <div className="books-container">
@@ -28,9 +42,13 @@ class SingleBook extends React.Component {
             </div>
             <div className="book-container-right">
               <h3>{singleBook.name}</h3>
-              <Link to={`/authors/${singleBook.authorId}`}>
-                <h4>Author: {singleBook.author.name}</h4>
-              </Link>
+              {singleBook.author ? (
+                <Link to={`/authors/${singleBook.authorId}`}>
+                  <h4>Author: {singleBook.author.name}</h4>
+                </Link>
+              ) : (
+                <p>Unknown Author</p>
+              )}
               <p>
                 <b>Description:</b> {singleBook.description}
               </p>
@@ -38,8 +56,18 @@ class SingleBook extends React.Component {
                 <b>Price:</b> ${singleBook.price / 100}
               </p>
               <p>
-                <b>Current Quantity:</b> {singleBook.quantity}
+                <b>Current stock:</b> {singleBook.inStock}
               </p>
+              <div>
+                Quantity:
+                <select onChange={this.handleChange} name="quantity">
+                  {options.map(num => (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <button
                 onClick={() => this.handleClick(singleBook.id)}
                 type="button"
@@ -47,6 +75,13 @@ class SingleBook extends React.Component {
                 Add to Cart
               </button>
             </div>
+          </div>
+          <div>
+            {this.props.user.isAdmin === true ? (
+              <EditBookForm bookId={singleBook.id} />
+            ) : (
+              ''
+            )}
           </div>
         </div>
       )
@@ -57,11 +92,13 @@ class SingleBook extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  singleBook: state.singleBook
+  singleBook: state.singleBook,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  getSingleBook: bookId => dispatch(getSingleBookThunk(bookId))
+  getSingleBook: bookId => dispatch(getSingleBookThunk(bookId)),
+  putBookInCart: orderReq => dispatch(putBookInCart(orderReq))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleBook)

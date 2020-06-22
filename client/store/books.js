@@ -4,7 +4,7 @@ import history from '../history'
 // ACTION TYPES
 const GET_All_BOOKS = 'GET_All_BOOKS'
 const ADD_BOOK = 'ADD_BOOK'
-
+const BOOK_DELETED = 'BOOK_DELETED'
 // ACTION CREATOR
 export const getAllBooks = allBooks => ({
   type: GET_All_BOOKS,
@@ -15,7 +15,10 @@ export const addBook = book => ({
   type: ADD_BOOK,
   book
 })
-
+const deletedBook = id => ({
+  type: BOOK_DELETED,
+  id
+})
 // THUNK
 export const getAllBooksThunk = () => async dispatch => {
   try {
@@ -38,6 +41,15 @@ export const addBookThunk = body => async dispatch => {
   }
 }
 
+export const deleteBook = id => async dispatch => {
+  try {
+    const {data} = await axios.delete(`/api/books/${id}`)
+    dispatch(deletedBook(data))
+  } catch (error) {
+    console.log("Error, the Book wasn't deleted")
+  }
+}
+
 // REDUCER
 export default function booksReducer(state = [], action) {
   switch (action.type) {
@@ -45,6 +57,8 @@ export default function booksReducer(state = [], action) {
       return action.allBooks
     case ADD_BOOK:
       return [...state, action.book]
+    case BOOK_DELETED:
+      return state.filter(book => book.id !== action.id)
     default:
       return state
   }

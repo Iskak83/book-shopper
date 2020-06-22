@@ -40,4 +40,42 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    req.body.price = req.body.price * 100
+    const bookTemplate = req.body
+    for (let key in bookTemplate) {
+      if (bookTemplate[key] === 0 || bookTemplate[key] === '')
+        delete bookTemplate[key]
+    }
+    const bookToEdit = await Book.findByPk(req.params.id)
+    const changedBook = await bookToEdit.update(bookTemplate)
+    if (bookTemplate.author) {
+      const authorChange = await Author.findOrCreate({
+        where: {
+          name: bookTemplate.author
+        }
+      })
+      await changedBook.setAuthor(authorChange[0])
+      const changedBookAuthor = await Book.findByPk(req.params.id, {
+        include: Author
+      })
+      res.json(changedBookAuthor)
+    } else {
+      res.json(changedBook)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const bookToRemove = await Book.findByPk(req.params.id)
+    await bookToRemove.destroy()
+    res.send(req.params.id)
+  } catch (error) {
+    next(error)
+  }
+})
 module.exports = router
