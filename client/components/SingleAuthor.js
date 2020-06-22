@@ -44,7 +44,6 @@ class SingleAuthor extends React.Component {
                         </Link>
                         <h3>{book.authorName}</h3>
                         <h3>Price: ${book.price / 100}</h3>
-                        <button type="submit">Add to Cart</button>
                       </div>
                     </div>
                   }

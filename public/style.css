@@ -84,3 +84,14 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.remove_button {
+  background-color: red;
+  color: #fff;
+  border: none;
+
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}

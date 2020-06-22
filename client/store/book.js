@@ -20,6 +20,14 @@ export const getSingleBookThunk = bookId => async dispatch => {
     console.error(err)
   }
 }
+export const updateBook = (bookId, bookChanges) => async dispatch => {
+  try {
+    const {data} = await axios.put(`/api/books/${bookId}`, bookChanges)
+    dispatch(getSingleBook(data))
+  } catch (error) {
+    console.log('Error in updating this Book!')
+  }
+}
 
 // REDUCER
 export default function singleBookReducer(state = {}, action) {

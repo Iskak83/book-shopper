@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addBookThunk} from '../store/books'
+import {updateBook} from '../store/book'
 
-class AddBookForm extends React.Component {
+class EditBookForm extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -10,7 +10,8 @@ class AddBookForm extends React.Component {
       image: '',
       tag: '',
       price: 0,
-      stock: 0
+      stock: 0,
+      author: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,13 +21,14 @@ class AddBookForm extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault()
-    this.props.addBook(this.state)
+    this.props.updateBook(this.props.bookId, this.state)
     this.setState({
       name: '',
       image: '',
       tag: '',
       price: 0,
-      stock: 0
+      stock: 0,
+      author: ''
     })
   }
 
@@ -73,6 +75,14 @@ class AddBookForm extends React.Component {
           value={this.state.stock}
         />
 
+        <label htmlFor="author">Author: </label>
+        <input
+          name="author"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.author}
+        />
+
         <button type="submit">
           {/* disabled={!this.state.name || !this.state.price} */}
           Submit
@@ -83,12 +93,12 @@ class AddBookForm extends React.Component {
   }
 }
 
-const mapStateTostate = state => ({
-  books: state.books
+const mapStateToProps = state => ({
+  singleBook: state.singleBook
 })
 
-const mapDispatchTostate = dispatch => ({
-  addBook: body => dispatch(addBookThunk(body))
+const mapDispatchToProps = dispatch => ({
+  updateBook: (bookId, bookChanges) => dispatch(updateBook(bookId, bookChanges))
 })
 
-export default connect(mapStateTostate, mapDispatchTostate)(AddBookForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditBookForm)

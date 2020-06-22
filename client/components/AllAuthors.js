@@ -9,9 +9,7 @@ class AllAuthors extends React.Component {
   // }
 
   componentDidMount() {
-    console.log('>>>>>>>>>>>>>>>')
     this.props.getAllAuthors()
-    // console.log('>>>>>>>>>>>>>>>')
   }
   render() {
     const allAuthors = this.props.authors

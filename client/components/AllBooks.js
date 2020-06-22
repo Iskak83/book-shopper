@@ -1,18 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getAllBooksThunk} from '../store/books'
+import {getAllBooksThunk, deleteBook} from '../store/books'
 import {Link} from 'react-router-dom'
+import {putBookInCart} from '../store/order'
 
 class AllBooks extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      // quantity:
+    }
   }
 
   componentDidMount() {
     this.props.getAllBooks()
   }
-
+  handleDelete(id) {
+    this.props.deleteBook(id)
+  }
   render() {
     const books = this.props.books
 
@@ -30,7 +35,6 @@ class AllBooks extends React.Component {
                 <Link to={`/books/${book.id}`}>
                   <p>{book.name}</p>
                 </Link>
-
                 {book.author ? (
                   <Link to={`/authors/${book.author.id}`}>
                     <p>Author: {book.author.name}</p>{' '}
@@ -39,7 +43,13 @@ class AllBooks extends React.Component {
                   <p>Unknown author</p>
                 )}
                 <p>Price: ${book.price / 100}</p>
-                <button type="button">Add to Cart</button>
+                <button
+                  onClick={() => this.handleDelete(book.id)}
+                  type="button"
+                  className="remove_button"
+                >
+                  Remove Book
+                </button>
               </div>
             </div>
           ))
@@ -54,7 +64,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getAllBooks: () => dispatch(getAllBooksThunk())
+  getAllBooks: () => dispatch(getAllBooksThunk()),
+  deleteBook: id => dispatch(deleteBook(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllBooks)
