@@ -78,5 +78,28 @@ router.put('/checkout', async (req, res, next) => {
     next(error)
   }
 })
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const checkoutOrder = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isCheckedout: false
+      }
+    })
+
+    const deletedBook = await BookOrder.findOne({
+      where: {
+        orderId: checkoutOrder.id,
+        bookId: req.params.id
+      }
+    })
+    await deletedBook.destroy()
+    res.send(req.params.id)
+    // res.status(204).json('Deleted')
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+})
 
 module.exports = router
