@@ -15,6 +15,9 @@ export const UserHome = props => {
       {isAdmin ? (
         <div>
           <p>Admin status: Admin</p>
+          <Link to="/users">
+            <button type="button">View All User Accounts</button>
+          </Link>
           <Link to="/add-book">
             <button type="button">Add book</button>
           </Link>

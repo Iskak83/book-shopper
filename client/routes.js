@@ -10,6 +10,7 @@ import AllAuthors from './components/AllAuthors'
 import SingleAuthor from './components/SingleAuthor'
 import AddBookForm from './components/AddBookForm'
 import Checkout from './components/Checkout'
+import AllUsers from './components/AllUsers'
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ class Routes extends Component {
           <Route exact path="/authors" component={AllAuthors} />
           <Route exact path="/authors/:id" component={SingleAuthor} />
           <Route exact path="/orders" component={Checkout} />
+          <Route exact path="/users" component={AllUsers} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}

@@ -8,7 +8,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
       <div className="nav-top">
-        <Link to="/">
+        <Link to="/home">
           <h1>UnderStory Books</h1>
         </Link>
 
