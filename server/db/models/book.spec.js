@@ -1,37 +1,91 @@
 /* global describe beforeEach it */
 
-const {expect} = require('chai')
-const db = require('../index')
-const Book = db.model('book')
+// const {expect} = require('chai')
+import {expect} from 'chai'
+// import {mount} from 'enzyme'
+// import sinon from 'sinon'
+const db = require('../db')
+const Book = require('./book')
 
-describe('Book model', () => {
+describe('Book Model', () => {
+  let book
+  before(() => db.sync({force: true}))
   beforeEach(() => {
-    return db.sync({force: true})
+    book = {
+      name: 'Frankenstein; or, The Modern Prometheus',
+      description:
+        'Frankenstein; or, The Modern Prometheus is a novel written by English author Mary Shelley that tells the story of Victor Frankenstein, a young scientist who creates a hideous sapient creature in an unorthodox scientific experiment.',
+      image:
+        'https://upload.wikimedia.org/wikipedia/commons/3/35/Frankenstein_1818_edition_title_page.jpg',
+      tag: 'Gothic/Horror',
+      price: 1299,
+      inStock: 100
+    }
+  })
+  afterEach(() => db.sync({force: true}))
+
+  it('has fields name, description, image, tag, price, inStock', async () => {
+    book.shouldNotExist = 'this attribute should not be allowed'
+    const newBook = await Book.create(book)
+
+    expect(newBook.name).to.equal('Frankenstein; or, The Modern Prometheus')
+    expect(newBook.description).to.equal(
+      'Frankenstein; or, The Modern Prometheus is a novel written by English author Mary Shelley that tells the story of Victor Frankenstein, a young scientist who creates a hideous sapient creature in an unorthodox scientific experiment.'
+    )
+    expect(newBook.image).to.equal(
+      'https://upload.wikimedia.org/wikipedia/commons/3/35/Frankenstein_1818_edition_title_page.jpg'
+    )
+    expect(newBook.tag).to.equal('Gothic/Horror')
+    expect(newBook.price).to.equal(1299)
+    expect(newBook.inStock).to.equal(100)
+    expect(newBook.shouldNotExist).to.equal(undefined)
   })
 
-  describe('attributes', () => {
-    it('returns object', async () => {
-      let book = await Book.create({
-        name: 'Garry',
-        price: 3.99,
-        authorName: 'Poter'
-      })
-      expect(book.name).to.be.equal('Garry')
-      expect(book.price).to.be.equal(3.99)
-      expect(book.authorName).to.be.equal('Poter')
-    })
-    it('returns undefined', async () => {
-      expect(
-        await Book.create({
-          name: 'Garry',
-          authorName: 'Poter'
-        })
-      ).to.throw('notNull Violation: book.price cannot be null')
-    })
+  it('name field cannot be empty', async () => {
+    book.name = ''
+    try {
+      const bookNameEmptyString = await Book.create(book)
+      if (bookNameEmptyString) {
+        throw Error('Validation should have failed with empty name')
+      }
+    } catch (err) {
+      expect(err.message).to.not.have.string('Validation should have failed')
+    }
+  })
 
-    // it('returns false if the password is incorrect', () => {
-    //   expect(cody.correctPassword('bonez')).to.be.equal(false)
-    // })
-    // end describe('correctPassword')
-  }) // end describe('instanceMethods')
-}) // end describe('User model')
+  it('price field cannot be empty', async () => {
+    book.price = ''
+    try {
+      const bookPriceEmptyString = await Book.create(book)
+      if (bookPriceEmptyString) {
+        throw Error('Validation should have failed with empty price')
+      }
+    } catch (err) {
+      expect(err.message).to.not.have.string('Validation should have failed')
+    }
+  })
+
+  it(`price field doesn't accept negative numbers`, async () => {
+    book.price = -1
+    try {
+      const bookPriceNegativeNumber = await Book.create(book)
+      if (bookPriceNegativeNumber) {
+        throw Error('Validation should have failed with negative number')
+      }
+    } catch (err) {
+      expect(err.message).to.not.have.string('Validation should have failed')
+    }
+  })
+
+  it(`price field doesn't accept non-integer numbers`, async () => {
+    book.price = 1.5
+    try {
+      const bookPriceNonIntegerNumber = await Book.create(book)
+      if (bookPriceNonIntegerNumber) {
+        throw Error('Validation should have failed with non-integer number')
+      }
+    } catch (err) {
+      expect(err.message).to.not.have.string('Validation should have failed')
+    }
+  })
+})

@@ -28,7 +28,12 @@ const Book = db.define('book', {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
+      isNonNegative(value) {
+        if (value < 0) {
+          throw new Error('Price is invalid!')
+        }
+      }
     }
   },
 

@@ -6,12 +6,12 @@ const GET_All_BOOKS = 'GET_All_BOOKS'
 const ADD_BOOK = 'ADD_BOOK'
 
 // ACTION CREATOR
-const getAllBooks = allBooks => ({
+export const getAllBooks = allBooks => ({
   type: GET_All_BOOKS,
   allBooks
 })
 
-const addBook = book => ({
+export const addBook = book => ({
   type: ADD_BOOK,
   book
 })
