@@ -3,6 +3,7 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
+import users from './users'
 import booksReducer from './books'
 import singleBookReducer from './book'
 import authorsReducer from './authors'
@@ -10,6 +11,7 @@ import singleAuthorReducer from './singleAuthor'
 import orderReducer from './order'
 const reducer = combineReducers({
   user,
+  users,
   books: booksReducer,
   authors: authorsReducer,
   singleBook: singleBookReducer,
