@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getCart, putBookInCart, placedOrder} from '../store/order'
+import {getCart, putBookInCart, placedOrder, removeBook} from '../store/order'
 import axios from 'axios'
 
 class CheckoutOrder extends React.Component {
@@ -10,6 +10,7 @@ class CheckoutOrder extends React.Component {
     this.state = {}
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
@@ -36,6 +37,11 @@ class CheckoutOrder extends React.Component {
     this.props.placedOrder(finalOrder)
     // axios.put('/api/orders/checkout', finalOrder)
   }
+
+  handleDelete(id) {
+    this.props.removeBook(id)
+  }
+
   render() {
     const order = this.props.order
     if (order[0]) {
@@ -87,6 +93,13 @@ class CheckoutOrder extends React.Component {
                   >
                     Change Quantity
                   </button>
+                  <button
+                    onClick={() => this.handleDelete(bookOrder.book.id)}
+                    type="button"
+                    className="remove_button"
+                  >
+                    Remove Book
+                  </button>
                 </div>
               </div>
             ))
@@ -120,7 +133,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCart: () => dispatch(getCart()),
   putBookInCart: orderReq => dispatch(putBookInCart(orderReq)),
-  placedOrder: finalOrder => dispatch(placedOrder(finalOrder))
+  placedOrder: finalOrder => dispatch(placedOrder(finalOrder)),
+  removeBook: bookId => dispatch(removeBook(bookId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutOrder)

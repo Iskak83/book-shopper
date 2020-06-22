@@ -539,6 +539,7 @@ function (_React$Component) {
     _this.state = {};
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -598,6 +599,11 @@ function (_React$Component) {
       this.props.placedOrder(finalOrder); // axios.put('/api/orders/checkout', finalOrder)
     }
   }, {
+    key: "handleDelete",
+    value: function handleDelete(id) {
+      this.props.removeBook(id);
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -645,7 +651,13 @@ function (_React$Component) {
               return _this2.handleClick(bookOrder.book.id);
             },
             type: "button"
-          }, "Change Quantity")));
+          }, "Change Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: function onClick() {
+              return _this2.handleDelete(bookOrder.book.id);
+            },
+            type: "button",
+            className: "remove_button"
+          }, "Remove Book")));
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " Checkout subtotal: $", subtotal / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total Quantity: ", totQty, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           className: "book-container-right",
@@ -680,6 +692,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     placedOrder: function placedOrder(finalOrder) {
       return dispatch(Object(_store_order__WEBPACK_IMPORTED_MODULE_3__["placedOrder"])(finalOrder));
+    },
+    removeBook: function removeBook(bookId) {
+      return dispatch(Object(_store_order__WEBPACK_IMPORTED_MODULE_3__["removeBook"])(bookId));
     }
   };
 };
@@ -2105,13 +2120,14 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!*******************************!*\
   !*** ./client/store/order.js ***!
   \*******************************/
-/*! exports provided: putBookInCart, getCart, placedOrder, default */
+/*! exports provided: putBookInCart, getCart, removeBook, placedOrder, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "putBookInCart", function() { return putBookInCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCart", function() { return getCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeBook", function() { return removeBook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "placedOrder", function() { return placedOrder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return orderReducer; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -2124,7 +2140,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
  // ACTION TYPE
 
-var GET_ORDER = 'GET_ORDER'; // ACTION CREATOR
+var GET_ORDER = 'GET_ORDER';
+var REMOVE_BOOK_FROM_ORDER = 'REMOVE_BOOK_FROM_ORDER'; // ACTION CREATOR
 
 var BookInCart = function BookInCart(collection) {
   return {
@@ -2137,6 +2154,13 @@ var retrieveCart = function retrieveCart(collection) {
   return {
     type: GET_ORDER,
     collection: collection
+  };
+};
+
+var removedBook = function removedBook(id) {
+  return {
+    type: REMOVE_BOOK_FROM_ORDER,
+    id: id
   };
 }; // THUNK
 
@@ -2229,45 +2253,86 @@ var getCart = function getCart() {
     }()
   );
 };
-var placedOrder = function placedOrder(finalOrder) {
+var removeBook = function removeBook(id) {
   return (
     /*#__PURE__*/
     function () {
       var _ref5 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee3(dispatch) {
-        var _ref6, data;
-
+        var data;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put('../api/orders/checkout', finalOrder);
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/orders/".concat(id));
 
               case 3:
-                _ref6 = _context3.sent;
-                data = _ref6.data;
-                dispatch(retrieveCart(data));
-                _context3.next = 11;
+                data = _context3.sent;
+                dispatch(removedBook(id));
+                _context3.next = 10;
                 break;
 
-              case 8:
-                _context3.prev = 8;
+              case 7:
+                _context3.prev = 7;
                 _context3.t0 = _context3["catch"](0);
-                console.error(_context3.t0);
+                console.log("Error, the Book wasn't removed from the cart");
 
-              case 11:
+              case 10:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 8]]);
+        }, _callee3, null, [[0, 7]]);
       }));
 
       return function (_x3) {
         return _ref5.apply(this, arguments);
+      };
+    }()
+  );
+};
+var placedOrder = function placedOrder(finalOrder) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref6 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(dispatch) {
+        var _ref7, data;
+
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put('../api/orders/checkout', finalOrder);
+
+              case 3:
+                _ref7 = _context4.sent;
+                data = _ref7.data;
+                dispatch(retrieveCart(data));
+                _context4.next = 11;
+                break;
+
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 8]]);
+      }));
+
+      return function (_x4) {
+        return _ref6.apply(this, arguments);
       };
     }()
   );
@@ -2280,6 +2345,11 @@ function orderReducer() {
   switch (action.type) {
     case GET_ORDER:
       return action.collection;
+
+    case REMOVE_BOOK_FROM_ORDER:
+      return state.filter(function (book) {
+        return book.bookId !== action.id;
+      });
 
     default:
       return state;
