@@ -49,7 +49,7 @@ router.put('/:id', isAdmin, async (req, res, next) => {
       if (bookTemplate[key] === 0 || bookTemplate[key] === '')
         delete bookTemplate[key]
     }
-    const bookToEdit = await Book.findByPk(req.params.id)
+    const bookToEdit = await Book.findByPk(req.params.id, {include: Author})
     const changedBook = await bookToEdit.update(bookTemplate)
     if (bookTemplate.author) {
       const authorChange = await Author.findOrCreate({

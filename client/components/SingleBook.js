@@ -29,6 +29,7 @@ class SingleBook extends React.Component {
   }
   render() {
     const singleBook = this.props.singleBook
+    console.log('wut', singleBook.inStock)
     console.log(singleBook)
     const options = []
 
@@ -75,12 +76,18 @@ class SingleBook extends React.Component {
                   ))}
                 </select>
               </div>
-              <button
-                onClick={() => this.handleClick(singleBook.id)}
-                type="button"
-              >
-                Add to Cart
-              </button>
+              {singleBook.inStock === 0 ? (
+                <button disabled className="disabled">
+                  Add to Cart
+                </button>
+              ) : (
+                <button
+                  onClick={() => this.handleClick(singleBook.id)}
+                  type="button"
+                >
+                  Add to Cart
+                </button>
+              )}
             </div>
           </div>
           <div>
