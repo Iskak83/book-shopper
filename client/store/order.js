@@ -51,6 +51,7 @@ export const removeBook = id => async dispatch => {
 export const placedOrder = finalOrder => async dispatch => {
   try {
     const {data} = await axios.put('../api/orders/checkout', finalOrder)
+    console.log(data)
     dispatch(retrieveCart(data))
   } catch (error) {
     console.error(error)

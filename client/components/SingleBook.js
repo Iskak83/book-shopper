@@ -22,11 +22,13 @@ class SingleBook extends React.Component {
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
   }
-  handleClick(id) {
+  async handleClick(id) {
     const orderReq = this.state
     orderReq.bookId = id
-    this.props.putBookInCart(orderReq)
-    if (this.props.order.book.id === id) {
+    await this.props.putBookInCart(orderReq)
+
+    console.log('what we are looking for', this.props.order)
+    if (this.props.order.filter(book => book.bookId === id).length) {
       NotificationManager.success(
         'You have added a new book!',
         'Successful!',
