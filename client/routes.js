@@ -11,7 +11,7 @@ import SingleAuthor from './components/SingleAuthor'
 import AddBookForm from './components/AddBookForm'
 import Checkout from './components/Checkout'
 import AllUsers from './components/AllUsers'
-
+import {NotificationContainer} from 'react-notifications'
 /**
  * COMPONENT
  */
@@ -48,6 +48,7 @@ class Routes extends Component {
           {/* Displays our Login component as a fallback */}
           <Route component={Login} />
         </Switch>
+        <NotificationContainer />
       </div>
     )
   }
