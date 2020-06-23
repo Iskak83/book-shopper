@@ -4,7 +4,7 @@ import {getSingleBookThunk} from '../store/book'
 import {Link} from 'react-router-dom'
 import {putBookInCart} from '../store/order'
 import EditBookForm from './EditBookForm'
-
+import {NotificationManager} from 'react-notifications'
 class SingleBook extends React.Component {
   constructor() {
     super()
@@ -14,6 +14,7 @@ class SingleBook extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
+
   componentDidMount() {
     this.props.getSingleBook(this.props.match.params.id)
   }
@@ -24,10 +25,17 @@ class SingleBook extends React.Component {
     const orderReq = this.state
     orderReq.bookId = id
     this.props.putBookInCart(orderReq)
+    if (this.props.order.book.id === id) {
+      NotificationManager.success(
+        'You have added a new book!',
+        'Successful!',
+        2000
+      )
+    }
   }
+
   render() {
     const singleBook = this.props.singleBook
-    console.log(singleBook)
     const options = []
 
     for (let i = 1; i <= 10; i++) {
@@ -93,7 +101,8 @@ class SingleBook extends React.Component {
 
 const mapStateToProps = state => ({
   singleBook: state.singleBook,
-  user: state.user
+  user: state.user,
+  order: state.order
 })
 
 const mapDispatchToProps = dispatch => ({

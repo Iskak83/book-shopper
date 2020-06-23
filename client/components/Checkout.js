@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getCart, putBookInCart, placedOrder, removeBook} from '../store/order'
 import axios from 'axios'
-
+import {NotificationManager} from 'react-notifications'
 class CheckoutOrder extends React.Component {
   constructor() {
     super()
@@ -35,7 +35,11 @@ class CheckoutOrder extends React.Component {
       isCheckedout: true
     }
     this.props.placedOrder(finalOrder)
-    // axios.put('/api/orders/checkout', finalOrder)
+    NotificationManager.success(
+      'Your Books are on their way!',
+      'Checkout Successful!',
+      2000
+    )
   }
 
   handleDelete(id) {
