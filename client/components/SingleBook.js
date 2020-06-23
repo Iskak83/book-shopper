@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom'
 import {putBookInCart} from '../store/order'
 import EditBookForm from './EditBookForm'
 
+// import 'react-toastify/dist/ReactToastify.css'
+
 class SingleBook extends React.Component {
   constructor() {
     super()
@@ -56,7 +58,12 @@ class SingleBook extends React.Component {
                 <b>Price:</b> ${singleBook.price / 100}
               </p>
               <p>
-                <b>Current stock:</b> {singleBook.inStock}
+                <b>Current stock: </b>
+                {singleBook.inStock === 0 ? (
+                  <b>Out of stock</b>
+                ) : (
+                  singleBook.inStock
+                )}
               </p>
               <div>
                 Quantity:

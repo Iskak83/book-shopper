@@ -42,7 +42,13 @@ class AllBooks extends React.Component {
                 ) : (
                   <p>Unknown author</p>
                 )}
+                <p>
+                  <b>Current stock: </b>
+                  {book.inStock === 0 ? <b>Out of stock</b> : book.inStock}
+                </p>
+
                 <p>Price: ${book.price / 100}</p>
+
                 {this.props.user && this.props.user.isAdmin === true ? (
                   <button
                     onClick={() => this.handleDelete(book.id)}

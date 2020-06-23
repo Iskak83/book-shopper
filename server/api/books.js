@@ -1,10 +1,11 @@
 const router = require('express').Router()
 const Book = require('../db/models/book')
 const Author = require('../db/models/author')
+const {isAdmin} = require('./permission')
 
 router.get('/', async (req, res, next) => {
   try {
-    const books = await Book.findAll({include: Author})
+    const books = await Book.findAll({include: Author, order: [['id', 'ASC']]})
     res.json(books)
   } catch (error) {
     next(error)
@@ -25,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin, async (req, res, next) => {
   try {
     req.body.price = req.body.price * 100
     const bookTemplate = req.body
@@ -40,7 +41,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isAdmin, async (req, res, next) => {
   try {
     req.body.price = req.body.price * 100
     const bookTemplate = req.body
@@ -69,7 +70,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', isAdmin, async (req, res, next) => {
   try {
     const bookToRemove = await Book.findByPk(req.params.id)
     await bookToRemove.destroy()
