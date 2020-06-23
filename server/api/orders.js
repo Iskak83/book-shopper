@@ -70,6 +70,16 @@ router.put('/checkout', async (req, res, next) => {
         isCheckedout: false
       }
     })
+    const currentOrder = await BookOrder.findAll({
+      where: {orderId: checkoutOrder.id},
+      include: Book
+    })
+    currentOrder.forEach(async bookOrder => {
+      let result = bookOrder.book.inStock - bookOrder.bookQuantity
+      await bookOrder.book.update({
+        inStock: result
+      })
+    })
     await checkoutOrder.update(req.body)
     const newOrder = await Order.create({})
     await req.user.addOrder(newOrder)

@@ -10,7 +10,7 @@ class EditBookForm extends React.Component {
       image: '',
       tag: '',
       price: 0,
-      stock: 0,
+      inStock: 0,
       author: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -27,7 +27,7 @@ class EditBookForm extends React.Component {
       image: '',
       tag: '',
       price: 0,
-      stock: 0,
+      inStock: 0,
       author: ''
     })
   }
@@ -67,12 +67,12 @@ class EditBookForm extends React.Component {
           value={this.state.price}
         />
 
-        <label htmlFor="stock">stock: </label>
+        <label htmlFor="inStock">stock: </label>
         <input
-          name="stock"
+          name="inStock"
           type="text"
           onChange={this.handleChange}
-          value={this.state.stock}
+          value={this.state.inStock}
         />
 
         <label htmlFor="author">Author: </label>
