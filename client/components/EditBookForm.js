@@ -34,61 +34,65 @@ class EditBookForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">name: </label>
-        <input
-          name="name"
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.name}
-        />
+      <div className="books-container">
+        <div className="user-container">
+          <form onSubmit={this.handleSubmit} className="add-book-form">
+            <label htmlFor="name">Name: </label>
+            <input
+              name="name"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.name}
+            />
 
-        <label htmlFor="image">image: </label>
-        <input
-          name="image"
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.image}
-        />
+            <label htmlFor="image">Image: </label>
+            <input
+              name="image"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.image}
+            />
 
-        <label htmlFor="tag">tag: </label>
-        <input
-          name="tag"
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.tag}
-        />
+            <label htmlFor="tag">Tag: </label>
+            <input
+              name="tag"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.tag}
+            />
 
-        <label htmlFor="price">price: </label>
-        <input
-          name="price"
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.price}
-        />
+            <label htmlFor="price">Price: </label>
+            <input
+              name="price"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.price}
+            />
 
-        <label htmlFor="inStock">stock: </label>
-        <input
-          name="inStock"
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.inStock}
-        />
+            <label htmlFor="inStock">Stock: </label>
+            <input
+              name="inStock"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.inStock}
+            />
 
-        <label htmlFor="author">Author: </label>
-        <input
-          name="author"
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.author}
-        />
+            <label htmlFor="author">Author: </label>
+            <input
+              name="author"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.author}
+            />
 
-        <button type="submit">
-          {/* disabled={!this.state.name || !this.state.price} */}
-          Submit
-        </button>
-        {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
-      </form>
+            <button type="submit">
+              {/* disabled={!this.state.name || !this.state.price} */}
+              Submit
+            </button>
+            {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
+          </form>
+        </div>
+      </div>
     )
   }
 }

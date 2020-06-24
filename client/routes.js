@@ -12,9 +12,13 @@ import AddBookForm from './components/AddBookForm'
 import Checkout from './components/Checkout'
 import AllUsers from './components/AllUsers'
 import {NotificationContainer} from 'react-notifications'
+import About from './components/About'
+import Contact from './components/Contact'
+
 /**
  * COMPONENT
  */
+
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -29,15 +33,14 @@ class Routes extends Component {
           {/* Routes placed here are available to all visitors */}
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          {/* <AllBooks /> */}
-          {/* <Route exact path="/" component={AllBooks} /> */}
           <Route exact path="/books" component={AllBooks} />
           <Route exact path="/add-book" component={AddBookForm} />
           <Route exact path="/books/:id" component={SingleBook} />
           <Route exact path="/authors" component={AllAuthors} />
           <Route exact path="/authors/:id" component={SingleAuthor} />
-          {/* <Route exact path="/orders" component={Checkout} /> */}
           <Route exact path="/users" component={AllUsers} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/contact" component={Contact} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}

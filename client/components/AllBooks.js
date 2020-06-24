@@ -7,9 +7,7 @@ import {putBookInCart} from '../store/order'
 class AllBooks extends React.Component {
   constructor() {
     super()
-    this.state = {
-      // quantity:
-    }
+    this.state = {}
   }
 
   componentDidMount() {

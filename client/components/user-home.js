@@ -10,21 +10,24 @@ export const UserHome = props => {
   const {email, isAdmin} = props
 
   return (
-    <div>
-      <h3>Welcome, {email}</h3>
-      {isAdmin ? (
-        <div>
-          <p>Admin status: Admin</p>
-          <Link to="/users">
-            <button type="button">View All User Accounts</button>
-          </Link>
-          <Link to="/add-book">
-            <button type="button">Add book</button>
-          </Link>
-        </div>
-      ) : (
-        <p>Admin status: User</p>
-      )}
+    <div className="books-container">
+      <div className="user-container">
+        <h3>Welcome, {email}</h3>
+        {isAdmin ? (
+          <div>
+            <p>Admin status: Admin</p>
+            <Link to="/users">
+              <button type="button">View All User Accounts</button>
+            </Link>
+            <br />
+            <Link to="/add-book">
+              <button type="button">Add book</button>
+            </Link>
+          </div>
+        ) : (
+          <p>Admin status: User</p>
+        )}
+      </div>
     </div>
   )
 }
